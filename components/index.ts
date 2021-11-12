@@ -1,1 +1,1 @@
-export { default as Button } from './ui/button/Button'
+export { default as Button } from './Button/Button'
