@@ -1,11 +1,12 @@
-import Head from 'next/head'
+import { Button } from "../components";
 
 export default function Home() {
-  const check = null;
+  const check = process.env.NEXT_PUBLIC_DEVELOPMENT_NODE_ENV;
   return (
     <div>
-      {check ?? "false"}
-      <h1>cf</h1>
+      {/* <Button label="click me" /> */}
+      {check}
+
     </div>
   )
 }
