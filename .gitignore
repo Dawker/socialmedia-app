@@ -16,7 +16,6 @@
 
 # misc
 .DS_Store
-/__tests__/
 
 # debug
 npm-debug.log*

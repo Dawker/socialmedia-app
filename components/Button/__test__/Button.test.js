@@ -23,9 +23,6 @@ import { Button } from '../../index';
 
 // tests
 
-it("renders without crashing", () => {
-  render(<Button />);
-})
 
 it("renders the name of the button from props", () => {
   render(<Button name="Login" />);
@@ -36,7 +33,7 @@ it("renders the name of the button from props", () => {
 })
 
 it("if prop value is not provided it renders a default text of Button ", () => {
-  render(<Button />);
+  render(<Button name="" />);
 
   const button = screen.getByTestId('button')
 
