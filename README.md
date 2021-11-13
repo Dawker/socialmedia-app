@@ -9,8 +9,9 @@ Preview the example live on not done yet:
 
 ## For recruiters
 
--I will be making an account for you guys to test my app.
--I'm testing the app with the most common tests(unit,integration,end-to-end).
--If you want to see the test for the app they are going to be structers as follow:
--Components/Button/__test__/Button.test.js and so on
+## For recruiters
+
+[^1]: I will be making an account for you guys to test my app.
+[^2]: I'm testing the app with the most common tests like (unit,integration,end-to-end) with jest react testing cypress.  
+
 
