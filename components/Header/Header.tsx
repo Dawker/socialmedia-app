@@ -43,7 +43,7 @@ const Header = () => {
           <PlusCircleIcon className="navBtn" />
           <UserGroupIcon className="navBtn" />
           <HeartIcon className="navBtn" />
-          <img src="https://links.papareact.com/3ke"
+          <img src="https://cdn.fakercloud.com/avatars/dc_user_128.jpg"
             className="h-10 rounded-full cursor-pointer"
             alt="profile picture" />
         </div>
