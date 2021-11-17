@@ -1,4 +1,4 @@
-import { Posts, Stories } from ".."
+import { MiniProfile, Posts, Stories, Suggestions } from ".."
 
 const Feed = () => {
   return (
@@ -9,10 +9,9 @@ const Feed = () => {
         <Posts />
       </section>
 
-      <section>
-        {/* Mini profile */}
-        {/* Suggestions */}
-
+      <section className="hidden xl:inline-grid md:col-span-1">
+        <MiniProfile />
+        <Suggestions />
       </section>
     </main>
   )

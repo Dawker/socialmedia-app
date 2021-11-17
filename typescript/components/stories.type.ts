@@ -1,5 +1,5 @@
 export interface IStories {
-  name: string;
+  username: string;
   id?: number;
   image: string;
 }
