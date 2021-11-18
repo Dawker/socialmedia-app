@@ -10,8 +10,8 @@ const Stories = () => {
   return (
     <div className="flex space-x-2 p-6 bg-white mt-8 border rounded-sm 
       overflow-x-scroll scrollbar-thin scrollbar-thumb-black">
-      {stories.map(({ id, username, image }) => (
-        <Story key={id} username={username} image={image} />
+      {stories.map(({ id, username, profilePic }) => (
+        <Story key={id} username={username} profilePic={profilePic} />
       ))}
 
     </div>

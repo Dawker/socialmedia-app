@@ -1,29 +1,16 @@
 import { useEffect, useState } from "react";
-import faker from 'faker';
 
 import Post from "../Post/Post"
+import { generateMockData } from "../../utils/utils";
+import { IPost } from "../../typescript/components/post.types";
 
 const Posts = () => {
-  const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState(generateMockData(5));
 
-  useEffect(() => {
-    const fakeStories = [...Array(5)].map((_, i) => {
-      return {
-        id: i,
-        username: faker.name.findName(),
-        userImage: faker.image.avatar(),
-        image: faker.image.avatar(),
-        caption: "ullamco laboris nisi ut aliquip ex ea commodo consequat."
-      }
-    })
-    setPosts(fakeStories);
-
-  }, [])
   return (
     <div>
-
-      {posts.map((post) => (
-        <Post key={post.id} post={post} />
+      {posts.map((post: IPost) => (
+        <Post key={post.id} caption={post.caption} profilePic={post.profilePic} image={post.image} username={post.username} />
       ))}
     </div>
   )

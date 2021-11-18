@@ -1,5 +1,4 @@
-export interface IStories {
-  username: string;
-  id?: number;
-  image: string;
+import { IUser } from "../type";
+
+export interface IStories extends IUser {
 }
