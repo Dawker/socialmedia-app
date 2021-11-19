@@ -14,4 +14,7 @@ body{
   .btn {
     @apply h-7 hover:scale-125 transition-all duration-150 ease-out cursor-pointer;
   }
+  .p-Profile{
+    padding:2px;
+  }
 }

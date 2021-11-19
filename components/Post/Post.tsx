@@ -9,11 +9,11 @@ const Post: React.FC<IPost> = ({ username, profilePic, image, caption }) => {
     <div className="bg-white my-7 border rounded-sm">
       <div className="flex items-center p-5">
         <img src={profilePic} className="rounded-full h-12 w-12 
-          object-contain border p-1 mr-3" alt="profile image" />
+          object-contain border p-Profile mr-3" alt="profile image" />
         <p className="flex-1 font-semibold">{username}</p>
         <DotsHorizontalIcon className="h-5" />
       </div>
-      <img src={image} className="object-cover w-full" alt="post image" />
+      <img src={image} className="object-cover h-full w-full" alt="post image" />
       <div className="flex items-center justify-between px-4 pt-4">
         <div className="flex space-x-4">
           <HeartIcon className="btn" />
