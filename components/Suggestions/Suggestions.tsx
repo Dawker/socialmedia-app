@@ -14,7 +14,7 @@ const Suggestions = () => {
       </div>
       {suggestions.map((profile) => (
         <div className="flex item-center justify-between mt-4" key={profile.id}>
-          <img src={profile.profilePic} className="w-10 h-10 rounded-full border 
+          <img src={"https://lh3.googleusercontent.com/a-/AOh14GhWXn1ZsR3e3AJXNj1_ZMtz2jOlaD1FXC1r6fHl=s96-c"} className="w-10 h-10 rounded-full border 
             p-Profile" alt="profile pic" />
           <div className="flex-1 ml-4">
             <h2 className="font-semibold text-sm">{profile.username}</h2>

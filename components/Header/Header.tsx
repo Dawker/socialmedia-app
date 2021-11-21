@@ -2,8 +2,11 @@ import Image from 'next/image'
 import { SearchIcon, PlusCircleIcon, HeartIcon, PaperAirplaneIcon, MenuIcon, UserGroupIcon } from '@heroicons/react/outline'
 import { HomeIcon } from '@heroicons/react/solid'
 
+import { IHeaderProps } from '../../typescript/components/header.types'
+import { signIn, signOut } from 'next-auth/react'
 
-const Header = () => {
+
+const Header: React.FC<IHeaderProps> = ({ user }) => {
   return (
     <nav className="shadow-sm border-b bg-white sticky top-0 z-50">
       <div className="flex justify-between max-w-6xl mx-1 lg:mx-auto">
@@ -34,18 +37,25 @@ const Header = () => {
         <div className="flex items-center justify-end space-x-4">
           <HomeIcon className="navBtn" />
           <MenuIcon className="h-6 md:hidden cursor-pointer" />
-          <div className="relative navBtn">
-            <PaperAirplaneIcon className="navBtn rotate-45" />
-            <div className="absolute -top-1 -right-3 text-xs w-5 h-5 bg-red-500 
+          {user ? (
+            <>
+              <div className="relative navBtn">
+                <PaperAirplaneIcon className="navBtn rotate-45" />
+                <div className="absolute -top-1 -right-3 text-xs w-5 h-5 bg-red-500 
             rounded-full flex items-center justify-center animate-pulse 
             text-white">3</div>
-          </div>
-          <PlusCircleIcon className="navBtn" />
-          <UserGroupIcon className="navBtn" />
-          <HeartIcon className="navBtn" />
-          <img src="https://cdn.fakercloud.com/avatars/dc_user_128.jpg"
-            className="h-10 rounded-full cursor-pointer"
-            alt="profile picture" />
+              </div>
+              <PlusCircleIcon className="navBtn" />
+              <UserGroupIcon className="navBtn" />
+              <HeartIcon className="navBtn" />
+              <img src={user.image}
+                onClick={() => signOut()}
+                className="h-10 rounded-full cursor-pointer"
+                alt="profile picture" />
+            </>
+          ) : (
+            <button onClick={() => signIn()}>Sign In</button>
+          )}
         </div>
       </div>
     </nav>
