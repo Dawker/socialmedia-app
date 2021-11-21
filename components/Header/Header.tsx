@@ -6,7 +6,7 @@ import { HomeIcon } from '@heroicons/react/solid'
 const Header = () => {
   return (
     <nav className="shadow-sm border-b bg-white sticky top-0 z-50">
-      <div className="flex justify-between max-w-6xl mx-10 lg:mx-auto">
+      <div className="flex justify-between max-w-6xl mx-1 lg:mx-auto">
 
         {/* Left */}
         <div className="relative hidden lg:inline-grid w-24">
