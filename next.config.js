@@ -1,18 +1,13 @@
-const securityHeaders = [
-  {
-    key: 'X-Frame-Options',
-    value: 'https://accounts.google.com'
-  }
-]
 
-
-module.exports = {
+/**
+ * @type {import('next').NextConfig}
+**/
+const nextConfig = {
   swcMinify: true,
   images: {
     domains: ['links.papareact.com', 'https://cdn.fakercloud.com']
   },
+  /* config options here */
 }
 
-
-
-
+module.exports = nextConfig

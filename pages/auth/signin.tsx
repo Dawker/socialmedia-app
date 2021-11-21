@@ -1,4 +1,4 @@
-import { GetServerSideProps, NextPage } from 'next'
+import { GetServerSideProps } from 'next'
 import { ClientSafeProvider, getProviders, LiteralUnion, signIn } from 'next-auth/react'
 
 const signin = ({ providers }: Record<LiteralUnion<any, string>, ClientSafeProvider[]>) => {
@@ -16,9 +16,8 @@ const signin = ({ providers }: Record<LiteralUnion<any, string>, ClientSafeProvi
 }
 
 
-export const getServerSideProps = async (context: any) => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
   const providers = await getProviders();
-
 
   return {
     props: {
