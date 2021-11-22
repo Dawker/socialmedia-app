@@ -9,6 +9,7 @@ const Story: React.FC<StoryProps> = ({ username, profilePic }) => {
         alt={`${username} profile pic`} />
       <p className="text-xs w-14 truncate text-center">{username}</p>
 
+
     </div>
   )
 }

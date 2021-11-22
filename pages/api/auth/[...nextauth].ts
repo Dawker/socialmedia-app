@@ -9,13 +9,20 @@ export default NextAuth({
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     })
   ],
-
   pages: {
     signIn: "/auth/signin",
   },
-  // theme: {
-  //   colorScheme: "auto", // "auto" | "dark" | "light"
-  //   brandColor: "#F13287", // Hex color value
-  //   logo: "" // Absolute URL to logo image
-  // }
-})
+  callbacks: {
+    async session({ session, token, }) {
+      // Save the user's profile data to the session
+      const profilePic = session.user.image
+
+      session.user.username = session.user.name.split(" ").join("").toLowerCase();
+      session.user.uid = token.sub;
+      session.user.profilePic = profilePic;
+
+      return session;
+    }
+  }
+
+});

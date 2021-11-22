@@ -8,7 +8,7 @@ export interface IUser {
   fullName?: string;
   bio?: string;
   stories?: IStories[];
-  username: string;
+  username?: string;
   id?: number;
-  profilePic: string;
+  profilePic?: string;
 }
