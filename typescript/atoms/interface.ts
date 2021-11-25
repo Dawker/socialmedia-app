@@ -22,4 +22,4 @@ export type {
   TypesOfNotifications,
   INotification,
   INotifications
-};
+}
