@@ -13,7 +13,6 @@ function generateMockData(howMany: number): IUser[] {
       caption: "ullamco laboris nisi ut aliquip ex ea commodo consequat."
     }
   })
-
   return mockData;
 }
 

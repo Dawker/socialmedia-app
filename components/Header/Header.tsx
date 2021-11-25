@@ -1,28 +1,27 @@
-import Image from 'next/image'
 import { SearchIcon, PlusCircleIcon, HeartIcon, PaperAirplaneIcon, MenuIcon, UserGroupIcon } from '@heroicons/react/outline'
 import { HomeIcon } from '@heroicons/react/solid'
+import { useRouter } from 'next/router'
 
 import { IHeaderProps } from '../../typescript/components/header.types'
 import { signIn, signOut } from 'next-auth/react'
-import { useRouter } from 'next/router'
 import { useRecoilState } from 'recoil'
-import { modalState } from '../../atoms/modalAtom'
+import { modal } from '../../atoms/modalAtom'
 
 
 const Header: React.FC<IHeaderProps> = ({ profilePic }) => {
-  const [isOpen, setIsOpen] = useRecoilState(modalState);
+  const [isOpen, setIsOpen] = useRecoilState(modal);
   const router = useRouter()
 
   return (
     <nav className="shadow-sm border-b bg-white sticky top-0 z-50">
-      <div className="flex justify-between max-w-6xl mx-1 lg:mx-auto">
+      <div className="flex justify-between items-center max-w-6xl mx-1 lg:mx-auto">
 
         {/* Left */}
         <div onClick={() => router.push("/")} className="relative hidden lg:inline-grid w-24 cursor-pointer">
-          <Image src="https://links.papareact.com/OCW" layout="fill" objectFit='contain' />
+          <img src="https://links.papareact.com/OCW" className="object-contain" />
         </div>
         <div onClick={() => router.push("/")} className="relative w-10 lg:hidden flex-shrink-0 cursor-pointer">
-          <Image src="https://links.papareact.com/jjm" layout="fill" objectFit='contain' />
+          <img src="https://links.papareact.com/jjm" className="object-contain" />
         </div>
 
         {/* Middle - Search input field */}
@@ -59,7 +58,6 @@ const Header: React.FC<IHeaderProps> = ({ profilePic }) => {
                 className="h-10 rounded-full cursor-pointer"
                 alt="profile picture" />
             </>
-
           ) : (
             <button onClick={() => signIn()}>Sign In</button>
           )}

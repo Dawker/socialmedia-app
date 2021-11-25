@@ -11,7 +11,7 @@ const Stories = () => {
     <div className="flex space-x-2 p-6 bg-white mt-8 border rounded-sm 
       overflow-x-scroll scrollbar-thin scrollbar-thumb-black">
       {stories.map(({ id, username, profilePic }) => (
-        <Story key={id} username={username} profilePic={profilePic} />
+        <Story key={id} username={username} profilePic={'https://lh3.googleusercontent.com/a-/AOh14GhhnmTLkOt8vjOjq81GluGGj6LO7bVcHl4XieTn=s96-c'} />
       ))}
 
     </div>

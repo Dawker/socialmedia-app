@@ -1,11 +1,12 @@
 import { Dialog, Transition } from '@headlessui/react'
+import { CameraIcon } from '@heroicons/react/solid';
 import { Fragment } from 'react';
 import { useRecoilState } from 'recoil';
 
-import { modalState } from '../../atoms/modalAtom';
+import { modal } from '../../atoms/modalAtom';
 
 const Modal = () => {
-  const [isOpen, setIsOpen] = useRecoilState(modalState);
+  const [isOpen, setIsOpen] = useRecoilState(modal);
 
   return (
     <Transition.Root show={isOpen} as={Fragment}>
@@ -46,6 +47,14 @@ const Modal = () => {
             pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 
             sm:align-middle sm:max-w-sm sm:w-full sm:p-6 z-20">
               <div>
+                <div className="mx-auto flex items-center 
+                bg-red-100 cursor-pointer
+                justify-center h-12 w-12 rounded-full">
+                  <CameraIcon
+                    className="h-6 w-6 text-red-600"
+                    aria-hidden="true"
+                  />
+                </div>
                 <div>
                   <div className="mt-3 text-center sm:mt-5">
                     <Dialog.Title

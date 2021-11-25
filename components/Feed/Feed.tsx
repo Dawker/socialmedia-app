@@ -16,7 +16,7 @@ const Feed: React.FC<IFeedProps> = (props) => {
           {
             props.username && (
               <>
-                <MiniProfile username={props.username} />
+                <MiniProfile username={props.username} profilePic={props.profilePic} />
                 <Suggestions />
               </>
             )

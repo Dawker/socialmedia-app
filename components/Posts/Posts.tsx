@@ -10,7 +10,7 @@ const Posts = () => {
   return (
     <div>
       {posts.map((post: IPost) => (
-        <Post key={post.id} caption={post.caption} profilePic={post.profilePic} image={post.image} username={post.username} />
+        <Post key={post.id} caption={post.caption} profilePic={'https://lh3.googleusercontent.com/a-/AOh14Gil8NhiQUgZneEnrsh2bretXazhrEpKmLT9Fgpu=s96-c'} image={'https://lh3.googleusercontent.com/a-/AOh14Gil8NhiQUgZneEnrsh2bretXazhrEpKmLT9Fgpu=s96-c'} username={post.username} />
       ))}
     </div>
   )
