@@ -5,7 +5,7 @@ import { Header } from '../../components'
 const signin = ({ providers }: Record<LiteralUnion<any, string>, ClientSafeProvider[]>) => {
   return (
     <>
-      <Header />
+      <Header profilePic={""} />
       <div className="flex flex-col items-center justify-center 
       -mt-56
         min-h-screen py-2 px-14 text-center">

@@ -1,12 +1,61 @@
 import { Dialog, Transition } from '@headlessui/react'
 import { CameraIcon } from '@heroicons/react/solid';
-import { Fragment } from 'react';
+import { addDoc, collection, doc, serverTimestamp, updateDoc } from 'firebase/firestore';
+import { ref, getDownloadURL, uploadString } from 'firebase/storage';
+import { Fragment, useRef, useState } from 'react';
 import { useRecoilState } from 'recoil';
 
 import { modal } from '../../atoms/modalAtom';
+import { db, storage } from '../../firebase/clientApp';
+import { IModalProps } from '../../typescript/components/modal.type';
 
-const Modal = () => {
+const Modal: React.FC<IModalProps> = ({ username, profilePic }) => {
   const [isOpen, setIsOpen] = useRecoilState(modal);
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [loading, setLoading] = useState<boolean>(false);
+  const filerPickerRef = useRef<HTMLInputElement | null>(null);
+  const captionRef = useRef<HTMLInputElement | null>(null);
+
+  function getImage(e: React.ChangeEvent<HTMLInputElement>) {
+    const reader = new FileReader();
+    if (e.target.files[0]) {
+      reader.readAsDataURL(e.target.files[0]);
+    }
+
+    reader.onload = (readerEvent) => {
+      const image = readerEvent.target.result
+      setSelectedFile(image)
+    }
+  }
+
+  async function uploadPost() {
+    if (loading || !selectedFile) return;
+    setLoading(true)
+    // createa a new post to firestos posts collections
+    const docRef = await addDoc(collection(db, 'posts'), {
+      caption: captionRef.current?.value,
+      timestamp: serverTimestamp(),
+      username,
+      profilePic
+    })
+
+    // getting a reference to the image for the storage
+    const imageRef = ref(storage, `posts${docRef.id}/image`);
+
+    // uploading the image to the storage
+    await uploadString(imageRef, selectedFile, "data_url").then(async snapcshot => {
+      // getting the download url when uploaded
+      const downloadURL = await getDownloadURL(imageRef);
+
+      // updating the post with the image url
+      await updateDoc(doc(db, 'posts', docRef.id), { image: downloadURL })
+    })
+
+    setIsOpen(false);
+    setLoading(false);
+    setSelectedFile(null);
+    filerPickerRef.current = null
+  }
 
   return (
     <Transition.Root show={isOpen} as={Fragment}>
@@ -47,14 +96,24 @@ const Modal = () => {
             pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 
             sm:align-middle sm:max-w-sm sm:w-full sm:p-6 z-20">
               <div>
-                <div className="mx-auto flex items-center 
-                bg-red-100 cursor-pointer
-                justify-center h-12 w-12 rounded-full">
-                  <CameraIcon
-                    className="h-6 w-6 text-red-600"
-                    aria-hidden="true"
+                {selectedFile ? (
+                  <img
+                    onClick={() => setSelectedFile(null)}
+                    src={selectedFile}
+                    className="w-full object-contain cursor-pointer"
+                    alt="selected file"
                   />
-                </div>
+                ) : (
+                  <div onClick={() => filerPickerRef?.current?.click()} className="mx-auto flex items-center 
+                  bg-red-100 cursor-pointer
+                  justify-center h-12 w-12 rounded-full">
+                    <CameraIcon
+                      className="h-6 w-6 text-red-600"
+                      aria-hidden="true"
+                    />
+                  </div>
+                )}
+
                 <div>
                   <div className="mt-3 text-center sm:mt-5">
                     <Dialog.Title
@@ -65,22 +124,33 @@ const Modal = () => {
                     </Dialog.Title>
                   </div>
                   <div>
-                    <input type="file" hidden />
+                    <input
+                      ref={filerPickerRef}
+                      type="file"
+                      onChange={getImage}
+                      hidden
+                    />
                   </div>
                   <div className="mt-2">
-                    <input type="text" className="border-none focus:ring-0 w-full text-center"
+                    <input
+                      type="text"
+                      ref={captionRef}
+                      className="border-none focus:ring-0 w-full text-center"
                       placeholder="Enter a caption..." />
                   </div>
                 </div>
-                <div className="mt-5 sm:mt-6">
-                  <button type="button" className="inline-flex justify-center w-full rounded-md border
-                  border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white
-                  hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 disabled:bg-gray-300
-                  disabled:cursor-not-allowed 
-                  ">
-                    Upload Post
-                  </button>
+                <div
 
+                  className="mt-5 sm:mt-6">
+                  <button
+                    disabled={!selectedFile}
+                    onClick={uploadPost} type="button"
+                    className="inline-flex justify-center w-full rounded-md border
+                    border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white
+                  hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 disabled:bg-gray-300
+                    disabled:cursor-not-allowed">
+                    {loading ? "Uploading..." : "Upload Post"}
+                  </button>
                 </div>
               </div>
             </div>

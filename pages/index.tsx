@@ -11,7 +11,7 @@ export default function Home() {
     <div className="bg-gray-50 h-screen overflow-y-scroll scrollbar-hide">
       <Header profilePic={session?.user?.profilePic} />
       <Feed {...session?.user} />
-      <Modal />
+      <Modal {...session?.user} />
     </div>
   )
 }
